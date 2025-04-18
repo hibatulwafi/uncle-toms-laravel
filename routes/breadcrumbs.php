@@ -3,6 +3,7 @@
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 
 // admin dashboard
 Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
@@ -23,7 +24,7 @@ Breadcrumbs::macro('resource', function (string $name, string $title, ?string $p
     
         Breadcrumbs::for("{$name}.show", function (BreadcrumbTrail $trail, $model, $item) use ($name) {
             $trail->parent("{$name}.index", $model, $item);
-            \Log::info("{$name}.show");
+            Log::info("{$name}.show");
             if (Route::has("{$name}.show")) {
                 $trail->push($item->name ?? $model, route("{$name}.show", [$model, $item]));
             } else {
@@ -71,6 +72,8 @@ Breadcrumbs::resource('admin.menu', 'Menu');
 Breadcrumbs::resource('admin.menu.item', 'Menu Items', 'admin.menu');
 Breadcrumbs::resource('admin.category.type', 'Category Types');
 Breadcrumbs::resource('admin.category.type.item', 'Items', 'admin.category.type');
+Breadcrumbs::resource('admin.branches', 'Branches');
+Breadcrumbs::resource('admin.members', 'Members');
 
 // admin account Info
 Breadcrumbs::for('admin.account.info', function (BreadcrumbTrail $trail) {
