@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Member extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens; 
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,7 @@ class Member extends Authenticatable
         'birth_date',
         'gender',
         'address',
+        'api_token', // Ditambahkan untuk keperluan login API
     ];
 
     /**
@@ -35,6 +37,7 @@ class Member extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token', // Sebaiknya disembunyikan juga
     ];
 
     /**

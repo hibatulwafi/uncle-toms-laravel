@@ -1,0 +1,24 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+class MemberController extends Controller
+{
+    public function profile(Request $request): JsonResponse
+    {
+        // $request->user('member') akan berisi instance member yang terautentikasi
+        $member = $request->user('member');
+
+        // Anda bisa memilih data profil mana saja yang ingin Anda kembalikan
+        return response()->json([
+            'id' => $member->id,
+            'name' => $member->name,
+            'email' => $member->email,
+            // Tambahkan informasi profil lain yang relevan
+            'created_at' => $member->created_at,
+            'updated_at' => $member->updated_at,
+        ], 200);
+    }
+}

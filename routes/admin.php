@@ -43,7 +43,7 @@ Route::group([
     Route::get('/branches/{branch}', [BranchController::class, 'show'])->name('branches.show');
     Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
     Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
-    Route::patch('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
+    // Route::patch('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
 
 
@@ -53,7 +53,7 @@ Route::group([
     Route::get('/members/{branch}', [MemberController::class, 'show'])->name('members.show');
     Route::get('/members/{branch}/edit', [MemberController::class, 'edit'])->name('members.edit');
     Route::put('/members/{branch}', [MemberController::class, 'update'])->name('members.update');
-    Route::patch('/members/{branch}', [MemberController::class, 'update'])->name('members.update');
+    // Route::patch('/members/{branch}', [MemberController::class, 'update'])->name('members.update');
     Route::delete('/members/{branch}', [MemberController::class, 'destroy'])->name('members.destroy');
 
 
