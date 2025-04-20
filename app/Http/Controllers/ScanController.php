@@ -11,6 +11,48 @@ use Illuminate\Support\Facades\Validator;
 
 class ScanController extends Controller
 {
+    public function previewScan(Request $request)
+    {
+        try {
+            $member = $request->user('member');
+
+            if (!$member) {
+                return response()->json(['message' => 'Unauthorized'], 401);
+            }
+
+            $validator = Validator::make($request->all(), [
+                'qrcode' => 'required|string'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            // Validasi qrcode di tabel branches
+            $branch = Branch::where('qrcode', $request->qrcode)->first();
+
+            if (!$branch) {
+                return response()->json([
+                    'message' => 'QR Code tidak valid untuk cabang yang dipilih.'
+                ], 422);
+            }
+
+            return response()->json([
+                'message' => 'Scan berhasil.',
+                'data' => [
+                    'branch' => $branch->branch_name,
+                    'date' => now()->format('Y-m-d H:i:s'),
+                    'member_name' => $member->name
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Gagal memproses scan.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function scan(Request $request)
     {
         try {
@@ -39,7 +81,7 @@ class ScanController extends Controller
 
             // Simpan proses QR code
             $process = QrcodeProcess::create([
-                'branch_id' => $branch->id, // <- ✅ yang benar
+                'branch_id' => $branch->id,
                 'member_id' => $member->id,
                 'qrcode' => $request->qrcode,
                 'status' => 'pending',

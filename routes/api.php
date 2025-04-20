@@ -73,8 +73,9 @@ Route::prefix('app')->group(function () {
         Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
         // Scan QR
-        Route::post('/scan', [ScanController::class, 'scan'])->name('scan');
-        Route::post('/transaction', [ScanController::class, 'transaction'])->name('scan');
+        Route::get('/scan', [ScanController::class, 'previewScan'])->name('scan.preview');
+        Route::post('/scan', [ScanController::class, 'scan'])->name('scan.store');
+        Route::post('/transaction', [ScanController::class, 'transaction'])->name('scan.transaction');
     });
 
     // Onboarding (biasanya tidak memerlukan otentikasi)
