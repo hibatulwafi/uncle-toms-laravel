@@ -79,7 +79,7 @@ Route::prefix('app')->group(function () {
 
     // Onboarding (biasanya tidak memerlukan otentikasi)
     Route::get('/onboarding', [AppController::class, 'onboarding'])->name('onboarding.index');
-    Route::get('/latest', [AppController::class, 'getLatestAppVersion'])->name('app.latest_version');
+    Route::get('/min-version', [AppController::class, 'getLatestAppVersion'])->name('app.latest_version');
 });
 
 # END API MOBILE APPS

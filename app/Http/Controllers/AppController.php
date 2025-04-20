@@ -17,7 +17,7 @@ class AppController extends Controller
             ->first();
 
         if ($appVersion) {
-            return response()->json(['latest_version' => $appVersion->min_version]);
+            return response()->json(['min_version' => $appVersion->min_version]);
         } else {
             return response()->json(['error' => 'Versi aplikasi tidak ditemukan'], 404);
         }
