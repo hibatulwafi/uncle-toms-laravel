@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AppMember;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Rating;
 use Illuminate\Http\JsonResponse;

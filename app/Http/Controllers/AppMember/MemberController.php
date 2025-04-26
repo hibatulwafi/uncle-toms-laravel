@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AppMember;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
